@@ -124,7 +124,8 @@ func (cmd *BuildpackUsage) Run(cli plugin.CliConnection, args []string) {
 
 	var apps []appLocator
 	if err == nil {
-		apps, err = getAppsByBuildpackGUID(cli, buildpackGUID)
+
+		apps, err = getAppsByBuildpackGUID(cli, buildpackGUID, buildpackName)
 	}
 
 	if err != nil {
@@ -153,7 +154,7 @@ func (cmd *BuildpackUsage) Start() {
 	plugin.Start(cmd)
 }
 
-func getAppsByBuildpackGUID(cli plugin.CliConnection, buildpackGUID string) (apps []appLocator, err error) {
+func getAppsByBuildpackGUID(cli plugin.CliConnection, buildpackGUID string, buildpackName string) (apps []appLocator, err error) {
 	apps = make([]appLocator, 0, 5)
 	orgSpaceMap := make(map[string]*orgSpaceInfo)
 
@@ -177,8 +178,13 @@ func getAppsByBuildpackGUID(cli plugin.CliConnection, buildpackGUID string) (app
 
 			appBuildpackGUID := appEntity["detected_buildpack_guid"]
 
+			appBuildpackName := appEntity["buildpack"]
+
 			if appBuildpackGUID == nil || (appBuildpackGUID.(string) != buildpackGUID) {
-				continue
+				// if the app was deployed without detection, we should try to match by buildpack name
+				if appBuildpackName != buildpackName {
+					continue
+				}
 			}
 
 			if orgSpaceMap[appSpaceURL] == nil {
