@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/cloudfoundry/cli/plugin"
-	"github.com/tom-collings/buildpack-usage/command"
+	"github.com/ecsteam/buildpack-usage/command"
 )
 
 func main() {

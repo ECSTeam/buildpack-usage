@@ -1385,7 +1385,7 @@
             "stack_guid": "cf4ffb39-e544-41e2-ba21-4a9177504595",
             "buildpack": "java_buildpack_offline",
             "detected_buildpack": "",
-            "detected_buildpack_guid": "3b49c9f0-f41a-40a4-b402-e45b9e26055a",
+            "detected_buildpack_guid": "",
             "environment_json": {
                "GOOGLE_APPLICATION_CREDENTIALS": "BOOT-INF/classes/client_secret.json"
             },
