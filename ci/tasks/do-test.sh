@@ -21,7 +21,7 @@ cd ${basedir}
 $GOPATH/bin/glide install
 
 # Run tests
-$GOPATH/bin/ginkgo command
+$GOPATH/bin/ginkgo -r .
 #go test `$GOPATH/bin/glide novendor`
 cd -
 
